@@ -10,7 +10,7 @@ testssrcdir=@abs_srcdir@
 #VALGRIND_SUPPRESSIONS_FILES = $(top_srcdir)/tests/pkcs11-provider.supp
 VALGRIND_FLAGS = --num-callers=30 -q --keep-debuginfo=yes
 
-check_PROGRAMS = tsession tgenkey tlsctx tdigests treadkeys tcmpkeys tfork pincache
+check_PROGRAMS = tsession tgenkey tlsctx tdigests treadkeys tcmpkeys tfork tfork_no_pin pincache
 
 tsession_SOURCES = tsession.c
 tsession_CFLAGS = $(STD_CFLAGS) $(OPENSSL_CFLAGS)
@@ -40,6 +40,10 @@ tfork_SOURCES = tfork.c
 tfork_CFLAGS = $(STD_CFLAGS) $(OPENSSL_CFLAGS)
 tfork_LDADD = $(OPENSSL_LIBS)
 
+tfork_no_pin_SOURCES = tfork_no_pin.c
+tfork_no_pin_CFLAGS = $(STD_CFLAGS) $(OPENSSL_CFLAGS)
+tfork_no_pin_LDADD = $(OPENSSL_LIBS)
+
 pincache_SOURCES = pincache.c
 pincache_CFLAGS = $(STD_CFLAGS) $(OPENSSL_CFLAGS)
 pincache_LDADD = $(OPENSSL_LIBS)
@@ -62,7 +66,7 @@ tmp.softhsm:
 dist_check_SCRIPTS = \
 	helpers.sh setup-softhsm.sh setup-softokn.sh softhsm-proxy.sh \
 	test-wrapper tbasic tcerts tecc tecdh tedwards tdemoca thkdf \
-	toaepsha2 trsapss tdigest ttls tpubkey tfork turi trand tecxc \
+	toaepsha2 trsapss tdigest ttls tpubkey tfork tfork_no_pin turi trand tecxc \
 	tcms
 
 test_LIST = \
